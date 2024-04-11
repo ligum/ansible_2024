@@ -1,0 +1,33 @@
+
+---
+- name: loops playbook
+  hosts: 172.16.17.8
+  become: yes
+
+  tasks:
+  - name: say hi to all
+    debug: msg="hello {{ item }}"
+    loop: #it's also possible with <with_item> command
+        - "john"
+        - "dave"
+        - "suzi"
+        - "ann"  
+
+  - name:  loop until  example
+    shell: echo -n XXXX >> myfile.txt && cat myfile.txt
+    register: output
+    delay: 2
+    retries: 10
+    until: output.stdout.find("XXXX") == false
+  
+  - name: print final output
+    debug: 
+       var: output.stdout 
+
+#  - name: install lot of packages
+#    apt: name={{ item }} state=installed
+#    with_items:
+#        - tree
+#        - python
+#        - mysql
+

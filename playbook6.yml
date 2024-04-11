@@ -1,0 +1,58 @@
+
+---
+- name: install apache and ipload my web page
+  hosts: all
+  become: yes
+
+  vars:
+    source_folder: ./mywebsite2
+    dest_folder: /var/www/html
+
+  tasks:
+
+  - name: check and print linux distribution
+    debug: var=ansible_os_family
+
+  - block: # BLOCK FOR DEBIAN
+
+     - name: install apache web server for ubuntu debian
+       apt: name=apache2 state=latest
+
+     - name: start web server service on Debian
+       service: name=apache2 state=started enabled=yes
+     
+    when: ansible_os_family == "Debian"
+
+  - block: # BLOCK FOR REDHAT
+
+     - name: install apache web server for redhat
+       yum: name=httpd state=latest
+
+     - name: start web server service on Redhat
+       service: name=httpd state=started enabled=yes
+   
+    when: ansible_os_family == "RedHat"
+
+  - name: copy myhomepage to servers
+#    copy: src={{ source_folder }}/{{ item }} dest={{ dest_folder }} mode=0555
+## 2nd way to copy files
+    copy: src={{ item }} dest={{ dest_folder }} mode=0555
+    with_fileglob: "{{ source_folder }}/*.*"
+# 1st way to copy files
+#    loop:
+#       - "herb.png"
+#       - "lita.png"
+#       - "map.png"
+#       - "index.html"
+    notify:
+       - restart apache redhat
+       - restart apache ubuntu
+
+  handlers:
+  - name : restart apache Debian
+    service: name=apache2 state=restarted
+    when: ansible_os_family == "Debian"
+
+  - name : restart apache Redhat
+    service: name=httpd state=restarted
+    when: ansible_os_family == "RedHat"

@@ -1,0 +1,47 @@
+
+---
+- name: install apache and ipload my web page
+  hosts: all
+  become: yes
+
+  vars:
+    source_file: ./mywebsite/index.html
+    dest_file: /var/www/html
+
+  tasks:
+
+  - name: check and print linux distribution
+    debug: var=ansible_os_family
+
+  - block: # BLOCK FOR DEBIAN
+
+     - name: install apache web server for ubuntu debian
+       apt: name=apache2 state=latest
+
+     - name: copy myhomepage to servers
+       copy: src={{ source_file }} dest={{ dest_file }} mode=0555
+
+     - name: start web server service on Debian
+       service: name=apache2 state=started enabled=yes
+     
+    when: ansible_os_family == "Debian"
+
+  - block: # BLOCK FOR REDHAT
+
+     - name: install apache web server for redhat
+       yum: name=httpd state=latest
+    
+     - name: copy myhomepage to servers
+       copy: src={{ source_file }} dest={{ dest_file }} mode=0555
+
+     - name: start web server service on Redhat
+       service: name=httpd state=started enabled=yes
+   
+    when: ansible_os_family == "RedHat"
+
+  handlers:
+  - name : restart apache Debian
+    service: name=apache2 state=restarted
+
+  - name : restart apache Redhat
+    service: name=httpd state=restarted

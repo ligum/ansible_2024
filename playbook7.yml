@@ -1,0 +1,38 @@
+
+---
+- name: import module playbook
+  hosts: all
+  become: yes
+
+  vars:
+   mytext: "hi from vova"
+
+  tasks:
+  - name: ping test
+    ping:
+  
+  - name: create folder1
+    file:
+     path: /home/moshe/ansible/folder1
+     state: directory
+     mode: 0755
+
+  - name: create folder2
+    file:
+     path: /home/moshe/ansible/folder2
+     state: directory
+     mode: 0755
+  - name: create file1
+    copy:
+      dest: /home/moshe/ansible/file1.txt
+      content: |
+        Text Line1, in file1
+        Text Line2, in file1
+        Text Line3, {{ mytext }}
+  - name: create file2
+    copy:
+      dest: /home/moshe/ansible/file2.txt
+      content: |
+        Text Line1, in file2
+        Text Line2, in file2
+        Text Line3, {{ mytext }}

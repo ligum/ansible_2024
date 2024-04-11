@@ -1,0 +1,95 @@
+ansible --version
+ansible-inventory --list
+ansible-inventory --graph
+ansible all -m ping
+find -name hosts.txt
+find -name ansible.cfg
+ansible all -m ping
+ansible all -m setup
+ansible all -m shell -a "uptime"
+ansible all -m shell -a "ls"
+ansible all -m shell -a "ls /etc"
+ansible all -m shell -a "ls /etc | grep python3"
+ansible all -m shell -a "ls /etc | grep python"
+ansible all -m shell -a "ls /etc | grep group"
+ansible all -m command -a "pwd"
+ansible all -m command -a "pwd"! > commands.txt
+ansible all -m copy "src=privet.txt dest="/home/vova mode=777"
+  335  ansible all -m copy -a "src=privet.txt dest="/home/vova mode=777"
+  336  ansible all -m copy -a "src=privet.txt dest="/home/vova mode=777" -b
+  337  ansible all -m copy -a "src=privet.txt dest=/home/vova mode=777" -b
+  338  ansible all -m shell -a "sudo apt install sshpass"
+  339  ansible all -m shell -a "sudo apt install sshpass -y"
+  340  ansible all -m shell -a "sudo apt install sshpass -y" -b
+  341  ansible all -m shell -a "sudo apt install sshpass" -y
+  342  ansible all -m shell -a "sudo apt install sshpass" -b
+  343  ansible all -m copy -a "src=privet.txt dest=/home/vova mode=777" -b
+  352  ansible all -m copy -a "src=privet.txt dest=/home/vova mode=777" -b
+  355  ansible all -m copy -a "src=privet.txt dest=/home/vova mode=777" -b
+  356  ansible all -m copy -a "src=privet.txt dest=/home mode=777" -b
+  357  ansible all -m copy -a "src=privet.txt dest=/home mode=777"
+  358  ansible all -m copy -a "src=privet.txt dest=/home" -b
+  359  ansible all -m copy -a "src=privet.txt dest=/home mode=777" -b
+  360  ansible all -m shell -a "rm /home/privet.txt" -b
+  361  ansible all -m  -a "src=privet.txt dest=/home/vova mode=777" -b
+  362  ansible all -m  copy -a "src=privet.txt dest=/home/vova mode=777" -b
+  363  ansible all -m shell-a "ls -la /home/vova"
+  364  ansible all -m shell -a "ls -la /home/vova"
+  365  ansible all -m file -a "path=/home/vova/privet.txt state=absent
+  366  ansible all -m file -a "path=/home/vova/privet.txt state=absent"
+  367  ansible ubuntu_vms -m  copy -a "src=privet.txt dest=/home/vova mode=777" -b
+  368  ansible all -m file -a "path=/home/vova/privet.txt state=absent"
+  371  ansible all -m get-url -a "url=https://collectors.sumologic.com/rest/download/linux/64 dest=/home" -b
+  372  ansible all -m get-url -a "url=https://collectors.sumologic.com/rest/download/linux/64 dest=/home"
+  373  ansible all -m get_url -a "url=https://collectors.sumologic.com/rest/download/linux/64 dest=/home" -b
+  374  ansible all -m shell -a "ls /home"
+  375  ansible all -m shell -a "ls -la /home"
+  376  ansible all -m file -a "path=/home/SumoCollector_linux_amd64_19_484-2.sh"
+  377  ansible all -m file -a "path=/home/SumoCollector_linux_amd64_19_484-2.sh state=absent"
+  378  ansible all -m file -a "path=/home/SumoCollector_linux_amd64_19_484-2.sh state=absent" -b
+  379  ansible all -m apt -a "name=stress state=installed" -b
+  380  ansible all -m yum -a "name=stress state=installed" -b
+  381  ansible all -m apt -a "name=stress state=installed" -b
+  382  ansible all -m sudo apt -a "name=stress state=installed" -b
+  383  ansible all -m yum -a "name=stress state=installed" -b
+  384  ansible all -m yum3 -a "name=stress state=installed" -b
+  385  ansible all -m yum4 -a "name=stress state=installed" -b
+  386  ansible all -m sudo apt -a "name=stress state=installed" -b
+  387  ansible all -m apt -a "name=stress state=installed" -b
+  388  ansible all -m apt -a "name=stress state=latest" -b
+  389  ansible all -m apt -a "name=stress state=removed" -b
+  390  ansible all -m apt -a "name=stress state=absent" -b
+  391  ansible all -m uri -a "url=https://ligum-it.blogspot.com"
+  392  ansible all -m uri -a "url=https://ligum-it.blogspot.com return_content=yes"
+  393  ansible all -m apt -a "name=httpd state=latest" -b
+  394  ansible all -m apt -a "name=httpd state=latst" -b
+  395  ansible all -m apt -a "name=httpd state=absent" -b
+  396  ansible all -m apt -a "name=apache2 state=latest" -b
+  397  ansible all -m service -a "name=httpd state=started enabled=yes" -b
+  398  ansible all -m service -a "name=apache2 state=started enabled=yes" -b
+  401  ansible all -m apt -a "name=apache2 state=removed" -b
+  402  ansible all -m apt -a "name=apache2 state=absent" -b
+  403  ansible all -m shell -a "ls /"
+  404  ansible all -m shell -a "ls /" -v
+  405  ansible all -m shell -a "ls /var" -v
+  406  ansible all -m shell -a "ls /var" -vv
+  407  ansible all -m shell -a "ls /var" -vvv
+  408  ansible all -m shell -a "ls /var" -vvvv
+  409  ansible all -m shell -a "ls /var" -vvvvv
+  410  ansible all -m shell -a "ls /var" -vvvvvv
+  411  ansible-doc -l
+  412  ansible-doc -l | grep win_
+  413  ansible-doc -l | grep ec2
+  527  sudo nano playbook3.yml
+  528  ansible all  -m apt -a "name=apache2 state=absent" -b
+  ansible-playbook playbook.yml
+  635  ansible all -m setup
+  ansible-playbook playbookloop.yml
+  741  ansible all -m
+  742  ansible all -m setup
+901  ansible-playbook playbook63.yml --extra-var "MYHOSTS=test_server_web"
+  902  ansible-playbook playbook63.yml --extra-var "MYHOSTS=prod_server_web"
+  903  ansible-playbook playbook63.yml --extra-var "MYHOSTS=prod_server_web owner=vovan"
+
+
+

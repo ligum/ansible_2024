@@ -1,0 +1,15 @@
+
+[test_server_web]
+linux3    ansible_host=172.16.17.8 ansible_user=vova owner=dave
+
+#[test_server_web:vars]
+#ansible_user=vova
+#ansible_ssh_private_key_file=/home/vova/linux3.pem
+
+[prod_server_web]
+linux2    ansible_host=172.16.17.5 ansible_user=vova owner=john
+
+#[prod_server_web:vars]
+#ansible_user=vova
+#ansible_ssh_private_key_file=/home/vova/linux2.pem 
+

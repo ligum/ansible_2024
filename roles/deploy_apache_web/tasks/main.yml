@@ -1,0 +1,37 @@
+---
+# tasks file for deploy_apache_web
+- block: # BLOCK FOR DEBIAN
+
+   - name: install apache web server for ubuntu debian
+     apt: name=apache2 state=latest
+
+   - name: start web server service on Debian
+     service: name=apache2 state=started enabled=yes
+
+  when: ansible_os_family == "Debian"
+
+- block: # BLOCK FOR REDHAT
+
+   - name: install apache web server for redhat
+     yum: name=httpd state=latest
+
+   - name: start web server service on Redhat
+     service: name=httpd state=started enabled=yes
+
+  when: ansible_os_family == "RedHat"
+
+- name: Generate INDEX.HTML file
+  template: src=index.j2 dest={{ dest_folder }}/index.html mode=0555
+  notify:
+      - restart apache RedHat
+      - restart apache Debian
+
+- name: copy myhomepage to servers
+  copy: src={{ item }} dest={{ dest_folder }} mode=0555
+  loop:
+      - "herb.png"
+      - "lita.png"
+      - "map.png"
+  notify:
+      - restart apache RedHat
+      - restart apache Debian

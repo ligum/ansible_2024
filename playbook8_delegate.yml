@@ -1,0 +1,50 @@
+
+---
+- name: delegate playbook
+  hosts: all
+  become: yes
+
+  vars:
+   mytext: "hi from Vova"
+
+  tasks:
+  - name: ping test
+    ping:
+
+  - name: unregister server from load balancer
+    shell: echo this server {{ inventory_hostname }} was deregistered from our load balancer, node name is {{ ansible_nodename }} >> /home/moshe/ansible/log.txt
+    delegate_to: 127.0.0.1 
+
+  - name: update my DB
+    shell: echo UPDATING Database....
+    run_once: true
+
+  - name: create file3
+    copy:
+      dest: /home/vova/ansible/file3.txt
+      content: |
+        This is a file3
+        In English hello world
+        In Hebrew {{ mytext }}
+    delegate_to: linux3
+
+  - name: create file4
+    copy:
+      dest: /home/vova/ansible/file4.txt
+      content: |
+        This is a file4
+        In English hello world
+        In Hebrew {{ mytext }}
+
+  - name: reboot my servers
+    shell: sleep 3 && reboot now
+    async: 1
+    poll: 0
+  
+  - name: wait untill my server will come up online
+    wait_for:
+        host: "{{ inventory_hostname }}"
+        state: started
+        delay: 5 
+        timout: 40
+    delegate_to: 127.0.0.1

@@ -1,0 +1,6 @@
+
+---
+ansible_user : vova
+ansible_ssh_passwd : vova
+environment : prod
+owner : vova

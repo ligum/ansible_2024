@@ -1,0 +1,20 @@
+
+---
+- name: create folder1
+  file:
+     path: /home/vova/ansible/folder1
+     state: directory
+     mode: 0755
+
+- name: create folder2
+  file:
+     path: /home/vova/ansible/folder2
+     state: directory
+     mode: 0755
+
+- name: create folder777
+  file:
+     path: /home/vova/ansible/folder777
+     state: directory
+     mode: 0755
+

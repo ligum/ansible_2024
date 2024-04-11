@@ -1,0 +1,40 @@
+
+---
+- name: my super duper playbook for variables
+  hosts: all
+  become: yes
+  
+  vars:
+    message1: hello
+    message2: world
+    secret  : abcd1234
+  
+  tasks: 
+  
+  - name: print secret variable
+    debug:
+      var: secret
+
+  - debug:
+      msg: "hidden word: {{ secret }}"
+
+  - debug:
+      msg: "the owner of this server is -->{{ owner }}<--"
+
+  - set_fact: full_message="{{ message1 }} {{ message2 }} from {{ owner }}"
+
+  - debug: 
+      var: full_message
+  
+
+  - debug:
+      var: ansible_distribution
+
+  - shell: uptime
+    register: results
+
+  - debug:
+      var: results
+
+  - debug:
+      var: results.stdout

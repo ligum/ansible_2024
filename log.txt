@@ -1,0 +1,14 @@
+this server linux3 was deregistered from our load balancer, node name is linux3
+this server linux2 was deregistered from our load balancer, node name is linux2
+this server linux2 was deregistered from our load balancer, node name is linux2
+this server linux3 was deregistered from our load balancer, node name is linux3
+this server linux3 was deregistered from our load balancer, node name is linux3
+this server linux2 was deregistered from our load balancer, node name is linux2
+this server linux3 was deregistered from our load balancer, node name is linux3
+this server linux2 was deregistered from our load balancer, node name is linux2
+this server linux3 was deregistered from our load balancer, node name is linux3
+this server linux2 was deregistered from our load balancer, node name is linux2
+this server linux2 was deregistered from our load balancer, node name is linux2
+this server linux3 was deregistered from our load balancer, node name is linux3
+this server linux2 was deregistered from our load balancer, node name is linux2
+this server linux3 was deregistered from our load balancer, node name is linux3
